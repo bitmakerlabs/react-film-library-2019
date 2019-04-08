@@ -1,10 +1,10 @@
 import React from 'react';
 import FilmRow from './FilmRow';
 
-const FilmListing = ({films}) => {
+const FilmListing = ({films, faves, onFaveToggle}) => {
   const filmRows = films.map((film) => {
     return (
-      <FilmRow film={film} key={film.id} />
+      <FilmRow film={film} key={film.id} isFave={faves.includes(film)} onFaveToggle={() => onFaveToggle(film)} />
     );
   });
 
@@ -23,7 +23,7 @@ const FilmListing = ({films}) => {
         </button>
         <button className="film-list-filter" onClick={() => handleFilterToggle('faves')}>
           FAVES
-          <span className="section-count">{0}</span>
+          <span className="section-count">{faves.length}</span>
         </button>
       </nav>
 

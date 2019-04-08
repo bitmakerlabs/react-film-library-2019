@@ -2,7 +2,7 @@ import React from 'react';
 import FilmPoster from './FilmPoster';
 import Fave from './Fave';
 
-const FilmRow = ({film}) => {
+const FilmRow = ({film, isFave, onFaveToggle}) => {
   const handleDetailsClick = (event) => {
     console.log(`Fetching details for ${film.title}`);
   }
@@ -15,7 +15,7 @@ const FilmRow = ({film}) => {
         <p>{new Date(film.release_date).getFullYear()}</p>
       </div>
 
-      <Fave />
+      <Fave isFave={isFave} onToggle={onFaveToggle} />
     </article>
   );
 };

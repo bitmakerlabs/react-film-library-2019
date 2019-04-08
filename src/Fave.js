@@ -1,13 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 
-const Fave = () => {
-  const [isFave, setIsFave] = useState(false);
-
+const Fave = ({isFave, onToggle}) => {
   const handleClick = (event) => {
     event.stopPropagation();
     console.log('Handling Fave click!');
 
-    setIsFave(!isFave);
+    onToggle();
   };
 
   const faveClass = isFave ? 'remove_from_queue' : 'add_to_queue';
