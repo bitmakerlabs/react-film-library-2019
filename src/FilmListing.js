@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import FilmRow from './FilmRow';
+import FaveContext from './FaveContext';
 
-const FilmListing = ({films, faves, onFaveToggle}) => {
+const FilmListing = ({films}) => {
+  const favesFromContext = useContext(FaveContext);
+
   const filmRows = films.map((film) => {
     return (
-      <FilmRow film={film} key={film.id} isFave={faves.includes(film)} onFaveToggle={() => onFaveToggle(film)} />
+      <FilmRow film={film} key={film.id} isFave={favesFromContext.faves.includes(film)} />
     );
   });
 
@@ -23,7 +26,7 @@ const FilmListing = ({films, faves, onFaveToggle}) => {
         </button>
         <button className="film-list-filter" onClick={() => handleFilterToggle('faves')}>
           FAVES
-          <span className="section-count">{faves.length}</span>
+          <span className="section-count">{favesFromContext.faves.length}</span>
         </button>
       </nav>
 

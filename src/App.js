@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import TMDB from './TMDB';
 import FilmListing from './FilmListing';
+import FaveContext from './FaveContext';
 
 const App = () => {
   const {films} = TMDB;
@@ -23,11 +24,13 @@ const App = () => {
 
   return (
     <main className="film-library">
-      <FilmListing films={films} faves={faves} onFaveToggle={handleFaveToggle} />
+      <FaveContext.Provider value={{faves: faves, toggleFave: handleFaveToggle}}>
+        <FilmListing films={films} />
 
-      <section className="film-details">
-        <h2 className="section-title">DETAILS</h2>
-      </section>
+        <section className="film-details">
+          <h2 className="section-title">DETAILS</h2>
+        </section>
+      </FaveContext.Provider>
     </main>
   );
 }

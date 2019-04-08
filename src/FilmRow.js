@@ -1,8 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import FilmPoster from './FilmPoster';
 import Fave from './Fave';
+import FaveContext from './FaveContext';
 
-const FilmRow = ({film, isFave, onFaveToggle}) => {
+
+const FilmRow = ({film, isFave}) => {
+  const favesFromContext = useContext(FaveContext);
+
   const handleDetailsClick = (event) => {
     console.log(`Fetching details for ${film.title}`);
   }
@@ -15,7 +19,7 @@ const FilmRow = ({film, isFave, onFaveToggle}) => {
         <p>{new Date(film.release_date).getFullYear()}</p>
       </div>
 
-      <Fave isFave={isFave} onToggle={onFaveToggle} />
+      <Fave isFave={isFave} onToggle={() => favesFromContext.toggleFave(film)} />
     </article>
   );
 };
