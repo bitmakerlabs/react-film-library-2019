@@ -1,5 +1,6 @@
 import React from 'react';
 import FilmPoster from './FilmPoster';
+import Fave from './Fave';
 
 const FilmRow = ({film}) => {
   return (
@@ -9,6 +10,8 @@ const FilmRow = ({film}) => {
         <h1>{film.title}</h1>
         <p>{new Date(film.release_date).getFullYear()}</p>
       </div>
+
+      <Fave />
     </article>
   );
 };
