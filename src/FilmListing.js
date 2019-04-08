@@ -4,7 +4,7 @@ import FilmRow from './FilmRow';
 const FilmListing = ({films}) => {
   const filmRows = films.map((film) => {
     return (
-      <FilmRow film={film} />
+      <FilmRow film={film} key={film.id} />
     );
   });
 
