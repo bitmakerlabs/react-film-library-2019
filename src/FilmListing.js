@@ -1,28 +1,37 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
+import TMDB from './TMDB';
 import FilmRow from './FilmRow';
-import FaveContext from './FaveContext';
+import FavesContext from './FavesContext';
 
-const FilmListing = ({films}) => {
-  const favesFromContext = useContext(FaveContext);
+const FilmList = () => {
+  const favesFromContext = useContext(FavesContext);
 
-  const filmRows = films.map((film) => {
-    return (
-      <FilmRow film={film} key={film.id} isFave={favesFromContext.faves.includes(film)} />
-    );
-  });
+  const [filter, setFilter] = useState('all');
 
   const handleFilterToggle = (filter) => {
+
     console.log(`Setting filter to ${filter}`);
+    setFilter(filter)
   }
+
+
+  const films = filter === 'faves' ? favesFromContext.faves : TMDB.films
+
+
+  const filmList = films.map((film) => {
+    return (
+      <FilmRow film={film} key={film.id} />
+    );
+  });
 
   return (
     <section className="film-list">
       <h1 className="section-title">FILMS</h1>
 
-      <nav className="film-list-filters">
+      <nav className="film-list-filters" >
         <button className="film-list-filter" onClick={() => handleFilterToggle('all')}>
           ALL
-          <span className="section-count">{films.length}</span>
+          <span className="section-count">{filmList.length}</span>
         </button>
         <button className="film-list-filter" onClick={() => handleFilterToggle('faves')}>
           FAVES
@@ -30,9 +39,10 @@ const FilmListing = ({films}) => {
         </button>
       </nav>
 
-      {filmRows}
+
+      {filmList}
     </section>
   );
 };
 
-export default FilmListing;
+export default FilmList;
